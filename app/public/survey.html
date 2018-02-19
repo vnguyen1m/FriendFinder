@@ -181,7 +181,7 @@
 		</div>
 	</main>
 
-	<footer class="page-footer pink accent-2">
+	<footer class="page-footer blue accent-2">
 		<div class="container">
 			<div class="row">
 				<div class="col l6 s12">
@@ -198,19 +198,33 @@
 	</footer>
 
 
+	<!-- Modal Dialog Displaying Closest Friend Match -->
+	<div id="modal1" class="modal">
+		<div class="modal-content">
+			<h4>Match</h4>
+			<div class="divider"></div>
+			<h5 id="userMatch"></h5>
+			<img id="userMatchImage" class="materialboxed" width="650" src="">
+		</div>
+		<div class="modal-footer">
+			<a href="/survey" class="modal-action modal-close waves-effect waves-green btn-flat">Fill Again!</a>
+		</div>
+	</div>
+
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('select').material_select();
 			$('.modal').modal({
-				dismissible: false, // Modal can be dismissed by clicking outside of the modal
-				opacity: .5, // Opacity of modal background
-				inDuration: 300, // Transition in duration
-				outDuration: 200, // Transition out duration
-				startingTop: '4%', // Starting top style attribute
-				endingTop: '10%' // Ending top style attribute
+				dismissible: true, 
+				opacity: .9, 
+				inDuration: 200, 
+				outDuration: 200, 
+				startingTop: '4%', 
+				endingTop: '20%' 
 			});
 		});
-		// Activate submit button
+
+
 		$('#submitButton').on('click', function(event) {
 			event.preventDefault();
 			// Gather user inputs
@@ -230,15 +244,12 @@
 					$('#question10').val().trim()
 				]
 			};
-			// console.log('userInput = ' + JSON.stringify(userInput));
-			// Add user inputs to friends list
-			$.post('/api/friends', userInput)
+
+			$.post('/Users/vanessa/Desktop/Berkeley Bootcamp 2017 Class/Homework/FriendFinder/app/data/friends.js', userInput)
       		.done(function(data) {
-      			// console.log('response = ' + JSON.stringify(data));
-      			// Set the name and image values of friend match
+
       			$('#userMatch').html(data.matchName);
 		    	$("#userMatchImage").attr("src", data.matchImage);
-		    	// Pop open the modal dialog
       			$('#modal1').modal('open');
       		});
 		});

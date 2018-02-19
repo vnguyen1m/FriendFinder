@@ -6,10 +6,11 @@ app.get("/app/data", function(request, response) {
 });
 
 app.get("app/data", function(request, response) {
-	response.send(path.join(__dirname, "survery.html"));
+	response.send(path.join(__dirname, "survey.html"));
 });
 
 // Route POST request
 app.post("app/data", function(request, response) {
 	response.send("You used " req.method);
 });
+
